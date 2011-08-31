@@ -8,7 +8,7 @@ require 'action_view/test_case'
 
 require 'versapay'
 
-Versapay::TOKEN = "abc"
+Versapay.token = "abc"
 
 module Rails
   class << self
