@@ -15,7 +15,6 @@ class ActionController::Base
     params = controller.request.parameters.dup
     ["action", "controller", "signature"].each { |k| params.delete(k) }
 
-
     url = controller.request.url.gsub /\?.*/, ""
     check = Versapay::WebhookSignature.hmac(controller.request.method, url, key, params)
     unless logger.nil?  then
@@ -26,10 +25,10 @@ class ActionController::Base
       logger.warn params.inspect
     end
 
-    if check != signature
-      raise Versapay::InvalidWebhookSignature
-    else
+    if check == signature
       true
+    else
+      raise Versapay::InvalidWebhookSignature
     end
   end
 end

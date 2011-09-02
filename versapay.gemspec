@@ -21,5 +21,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_development_dependency "rails", "2.3.11"
   s.add_development_dependency "activesupport", "2.3.11"
+  s.add_development_dependency "fakeweb"
+  s.add_runtime_dependency "json"
   s.add_runtime_dependency "rest-client"
 end
