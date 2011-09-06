@@ -8,7 +8,7 @@ module Versapay
     end
 
     def list
-      make_request(:get, "/api/funds.json")
+      Versapay::make_request(:get, "/api/funds.json")
     end
   end
 end

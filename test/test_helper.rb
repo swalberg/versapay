@@ -6,6 +6,7 @@ require 'active_support/test_case'
 require 'action_view'
 require 'action_view/test_case'
 require 'fakeweb'
+require 'awesome_print'
 
 require 'versapay'
 

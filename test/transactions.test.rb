@@ -1,31 +1,12 @@
 require 'test_helper'
 
-class DebitAgreementsTest < ActionView::TestCase
+class TransactionsTest < ActionView::TestCase
 
   def setup
     Versapay.key = "mykey"
     Versapay.token = "mytoken"
-  #Versapay.key = "EDe3Uflbesam5PnfNFPO"
-  #Versapay.token = "1kkOYn_uA6KWNjejFka1"
-    
     @v = Versapay::DebitAgreement.new
     FakeWeb.register_uri(:any, "https://demo.versapay.com", :body => "response for any HTTP method", :status => ["500", "bad test"])
-  end
-
-  test "creating a transaction with valid details" do
-    body = "{\"type\":\"debit_agreement\",\"state\":\"pending\",\"created_by_account\":\"wavepayrolltest\",\"token\":\"3HKJLAS2B12W\",\"message\":\"\",\"created_by_user\":\"1kkOYn_uA6KWNjejFka1\",\"reference\":\"test@example.com\",\"email\":\"test@example.com\",\"name\":\"\"}"
-    FakeWeb.register_uri(:post, "https://mytoken:mykey@demo.versapay.com/api/debit_agreements.json", :body => body)
-    results = @v.create("test@example.com")
-    assert_equal Hash, results.class
-    assert_equal "pending", results["state"]
-  end
-
-  test "creating a transaction with missing information" do
-    body = "{\"email\":\"invalid\"}"
-    FakeWeb.register_uri(:post, "https://mytoken:mykey@demo.versapay.com/api/debit_agreements.json", :body => body, :status => ["412", "Invalid input"])
-    assert_raises Versapay::InvalidInput do
-      results = @v.create("test")
-    end
   end
 
   test "viewing a transaction's details" do

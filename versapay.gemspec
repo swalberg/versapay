@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rails", "2.3.11"
   s.add_development_dependency "activesupport", "2.3.11"
   s.add_development_dependency "fakeweb"
+  s.add_development_dependency "awesome_print"
   s.add_runtime_dependency "json"
   s.add_runtime_dependency "rest-client"
 end

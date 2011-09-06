@@ -7,7 +7,9 @@ module Versapay
       yield self if block_given?
     end
 
-    def create
+    def create(email, reference = nil, message = nil)
+      args = { "email" => email, "reference" => email, "message" => message }
+      Versapay::make_request(:post, "/api/debit_agreements.json", args)
     end
 
     def list_sent(page = nil)
@@ -29,13 +31,17 @@ module Versapay
       Versapay::make_request(:post, "/api/debit_agreements/#{token}/approve.json", args)
     end
 
-    def reject
+    def reject(reason)
+      ags = { "rejection_reason" => reason }
+      Versapay::make_request(:post, "/api/debit_agreements/#{token}/reject.json", args)
     end
 
     def cancel
+      Versapay::make_request(:post, "/api/debit_agreements/#{token}/reject.json", {})
     end
 
     def revoke
+      Versapay::make_request(:post, "/api/debit_agreements/#{token}/reject.json", {})
     end
 
   end
