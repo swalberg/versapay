@@ -7,7 +7,8 @@ module Versapay
       yield self if block_given?
     end
 
-    def create
+    def create(args)
+      Versapay::make_request(:post, "/api/transactions.json")
     end
 
     def list(page = nil)
