@@ -8,7 +8,7 @@ module Versapay
     end
 
     def create(args)
-      Versapay::make_request(:post, "/api/transactions.json")
+      Versapay::make_request(:post, "/api/transactions.json", args)
     end
 
     def list(page = nil)
