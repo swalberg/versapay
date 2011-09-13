@@ -17,13 +17,6 @@ class ActionController::Base
 
     url = controller.request.url.gsub /\?.*/, ""
     check = Versapay::WebhookSignature.hmac(controller.request.method, url, key, params)
-    unless logger.nil?  then
-      logger.warn "============="
-      logger.warn controller.request.method
-      logger.warn url
-      logger.warn key
-      logger.warn params.inspect
-    end
 
     if check == signature
       true
