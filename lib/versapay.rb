@@ -32,9 +32,9 @@ module Versapay
         when 200
           return JSON.parse(response)
         when 422
-          raise Versapay::Unprocessable
+          raise Versapay::Unprocessable, response
         when 500
-          raise Versapay::NotFound
+          raise Versapay::NotFound, response
         end
       end
     end
@@ -45,11 +45,11 @@ module Versapay
         when 200,201
           return JSON.parse(response)
         when 412
-          raise Versapay::InvalidInput #(JSON.parse(response))
+          raise Versapay::InvalidInput, response
         when 422
-          raise Versapay::Unprocessable
+          raise Versapay::Unprocessable, response
         when 500
-          raise Versapay::NotFound
+          raise Versapay::NotFound, response
         end
       end
     end
