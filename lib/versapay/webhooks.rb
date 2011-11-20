@@ -4,10 +4,10 @@ require 'base64'
 
 class ActionController::Base
   def self.check_versapay_signatures(key, *args)
-    before_filter lambda { |controller| check_versapay_signature(key, controller)}, *args
+    before_filter lambda { |controller| controller.check_versapay_signature(key, controller)}, *args
   end
 
-  def self.check_versapay_signature(key, controller)
+  def check_versapay_signature(key, controller)
     # Save the signature first
     signature = controller.request.parameters["signature"]
 
