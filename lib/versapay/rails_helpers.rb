@@ -2,10 +2,7 @@ module Versapay
   module Helpers
     # Provides a debit agreement link
     def debit_agreement_link_to(anchor, message = "Debit agreement", opts = {})
-      link = "https://" + Versapay::site + "/authorize?api_token=#{Versapay.token}&message=#{html_escape(message).gsub(/ /, "+")}"
-      opts.each do |k, v|
-        link += "&#{k}=#{html_escape(v)}"
-      end
+      link = debit_agreement_link(message, opts)
       "<a href=\"#{link}\">#{anchor}</a>"
     end
 
@@ -15,6 +12,16 @@ module Versapay
         link += "&#{k}=#{html_escape(v)}"
       end
       "<a href=\"#{link}\">#{anchor}</a>"
+    end
+
+    def debit_agreement_link(message = "Debit agreement", opts = {})
+      link = "https://" + Versapay::site + "/authorize?api_token=#{Versapay.token}&message=#{html_escape(message).gsub(/ /, "+")}"
+      opts.each do |k, v|
+        link += "&#{k}=#{html_escape(v)}"
+      end
+
+      link
+
     end
   end
 end
