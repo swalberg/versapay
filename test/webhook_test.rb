@@ -1,5 +1,17 @@
 require 'test_helper'
-class WebhookTest < ActionView::TestCase
+class WebhookTest < ActionController::TestCase
+
+
+#  def setup
+#    @controller = TestController.new
+#    @request    = ActionController::TestRequest.new
+#    @response   = ActionController::TestResponse.new
+#    
+#    @routes = ActionDispatch::Routing::RouteSet.new
+#    @routes.draw do
+#      match '/foo' => "webhook_test/test#index", :as => "foo"
+#    end
+#  end
 
   test "signature generation" do
     params = {
@@ -52,12 +64,6 @@ class WebhookTest < ActionView::TestCase
 #
 #    def index
 #      render :text => "success"
-#    end
-#  end
-#
-#  def setup
-#    AppRoutes.draw do
-#      match '/foo' => "webhook_test/test#index", :as => "foo"
 #    end
 #  end
 #

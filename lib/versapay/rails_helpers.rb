@@ -7,10 +7,7 @@ module Versapay
     end
 
     def payment_checkout_link_to(anchor, message = "Credit Card payment", opts = {})
-      link = "https://" + Versapay::site + "/send_money?api_token=#{Versapay.token}&message=#{html_escape(message).gsub(/ /, "+")}"
-      opts.each do |k, v|
-        link += "&#{k}=#{html_escape(v)}"
-      end
+      link = payment_checkout_link(message, opts)
       "<a href=\"#{link}\">#{anchor}</a>"
     end
 
@@ -21,7 +18,15 @@ module Versapay
       end
 
       link
+    end
 
+    def payment_checkout_link(message = "Credit Card payment", opts = {})
+      link = "https://" + Versapay::site + "/send_money?api_token=#{Versapay.token}&message=#{html_escape(message).gsub(/ /, "+")}"
+      opts.each do |k, v|
+        link += "&#{k}=#{html_escape(v)}"
+      end
+
+      link
     end
   end
 end
