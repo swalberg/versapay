@@ -8,10 +8,12 @@ require "versapay/transactions"
 
 module Versapay
 
-  class InvalidInput < Exception; end
-  class InvalidWebhookSignature < Exception; end
-  class Unprocessable < Exception; end
-  class NotFound < Exception; end
+  class VersapayError < RuntimeError; end
+
+  class InvalidInput < VersapayError; end
+  class InvalidWebhookSignature < VersapayError; end
+  class Unprocessable < VersapayError; end
+  class NotFound < VersapayError; end
 
   class << self
     attr_accessor :token, :key
