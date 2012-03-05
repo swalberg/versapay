@@ -11,6 +11,8 @@ module Versapay
   class VersapayError < RuntimeError; end
 
   class InvalidInput < VersapayError; end
+  class DuplicateTransaction < InvalidInput; end
+
   class InvalidWebhookSignature < VersapayError; end
   class Unprocessable < VersapayError; end
   class NotFound < VersapayError; end
@@ -47,7 +49,12 @@ module Versapay
         when 200,201
           return JSON.parse(response)
         when 412
-          raise Versapay::InvalidInput, response
+          result = JSON.parse(response)
+          if result.key? "unique_reference"
+            raise Versapay::DuplicateTransaction, response
+          else
+            raise Versapay::InvalidInput, response
+          end
         when 422
           raise Versapay::Unprocessable, response
         when 500

@@ -13,7 +13,7 @@ module Versapay
 
     def list(page = nil)
       args = page.nil? ? {} : { :page => page }
-      Versapay::make_request(:get, "/api/transactions/sent.json", args)
+      Versapay::make_request(:get, "/api/transactions.json", args)
     end
 
     def view(token)
