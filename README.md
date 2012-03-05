@@ -18,6 +18,11 @@ class VersapayController < ApplicationController
 There are some Rails view helpers to set up a debit agreement:
 
 ```Ruby
+# The first you hear of a new debit agreement is when VersaPay sends a callback. So the reference should be
+# something you can use to identify your user. For example,
+# key = MyApp::Application.config.secret_token
+# verifier = ActiveSupport::MessageVerifier.new(key)
+# @reference = verifier.generate(@user.id)
 = link_to "Setup VersaPay", debit_agreement_link("Set up an agreement", { :reference => @reference, :pref => "ba" })
 ```
 
