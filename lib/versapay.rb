@@ -1,5 +1,6 @@
 require "versapay/version"
 
+require "uri"
 require "versapay/rails_helpers"
 require "versapay/webhooks"
 require "versapay/debit_agreement"
@@ -28,6 +29,13 @@ module Versapay
     Rails.env.production? ? "secure.versapay.com" : "demo.versapay.com"
   end
 
+  def self.uri(path, params={})
+    options = { :host => site, :path => path }
+
+    options = options.merge(:query => params.to_query) unless params.empty?
+
+    URI::HTTPS.build(options).to_s
+  end
 
   def self.make_request(method, url, args = {})
     if method == :get then
