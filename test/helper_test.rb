@@ -6,28 +6,26 @@ class HelperTest < ActionView::TestCase
 
 
   test "creating a debit agreement link_to" do
-    expected = '<a href="https://demo.versapay.com/authorize?api_token=' + Versapay::token + '&message=Testing+123">test</a>'
+    expected = '<a href="https://demo.versapay.com/authorize?api_token=' + Versapay.token + '&message=Testing+123">test</a>'
     assert_equal expected, debit_agreement_link_to("test", "Testing 123")
   end
 
   test "creating a debit agreement link_to with extra options" do
-    expected = '<a href="https://demo.versapay.com/authorize?api_token=' + Versapay::token + '&message=Testing+123&reference=abc123">test</a>'
+    expected = '<a href="https://demo.versapay.com/authorize?api_token=' + Versapay.token + '&message=Testing+123&reference=abc123">test</a>'
     assert_equal expected, debit_agreement_link_to("test", "Testing 123", {:reference => "abc123"})
   end
 
   test "creating a credit card link_to" do
-    expected = '<a href="https://demo.versapay.com/send_money?api_token=' + Versapay::token + '&message=Testing+123&pref=cc">test</a>'
+    expected = '<a href="https://demo.versapay.com/send_money?api_token=' + Versapay.token + '&message=Testing+123&pref=cc">test</a>'
     assert_equal expected, payment_checkout_link_to("test", "Testing 123", {:pref => "cc"})
   end
 
   test "creating a credit card link" do
-    expected = 'https://demo.versapay.com/send_money?api_token=' + Versapay::token + '&message=Testing+123&pref=cc'
-    assert_equal expected, payment_checkout_link("Testing 123", {:pref => "cc"})
+    assert_match %r{/send_money\?api_token=#{Versapay.token}&message=Testing\+123&pref=cc}, payment_checkout_link("Testing 123", {:pref => "cc"})
   end
 
   test "creating a debit agreement link" do
-    expected = 'https://demo.versapay.com/authorize?api_token=' + Versapay::token + '&message=Testing+123'
-    assert_equal expected, debit_agreement_link("Testing 123")
+    assert_match %r{/authorize\?api_token=#{Versapay.token}&message=Testing\+123}, debit_agreement_link('Testing 123')
   end
 
   test 'build an arbitrary link without query params' do
@@ -36,7 +34,6 @@ class HelperTest < ActionView::TestCase
   end
 
   test 'build an arbitrary link with query params' do
-    expected = 'https://demo.versapay.com/bacon?hello=world&foo=bar+baz'
-    assert_equal expected, Versapay.uri('/bacon', :hello => 'world', :foo => 'bar baz')
+    assert_equal 'https://demo.versapay.com/bacon?hello=world', Versapay.uri('/bacon', :hello => 'world')
   end
 end
