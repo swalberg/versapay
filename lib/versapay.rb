@@ -6,6 +6,7 @@ require "versapay/webhooks"
 require "versapay/debit_agreement"
 require "versapay/fund_sources"
 require "versapay/transactions"
+require "active_support/core_ext/object/to_query"
 
 module Versapay
 
