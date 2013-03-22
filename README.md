@@ -1,4 +1,4 @@
-# A gem to help with using VersaPay's API
+# A gem to help with using VersaPay's API [![Build Status](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](https://travis-ci.org/swalberg/versapay)
 
 ## Usage
 
